@@ -34,45 +34,6 @@ export class RenameKeysAdvanced implements INodeType {
 				default: false,
 			},
 			{
-				displayName: 'Use Key Rename Template',
-				name: 'useTemplate',
-				description: 'Whether to use a template to rename the keys',
-				type: 'boolean',
-				default: false,
-			},
-			{
-				displayName: 'Field From',
-				name: 'fieldFrom',
-				description: 'Name of the field where the key names to rename are stored',
-				type: 'string',
-				placeholder: 'from',
-				hint: 'The name of the field as text (e.g. “id”)',
-				default:'',
-				displayOptions:{
-					show:{
-						useTemplate:[
-							true
-						]
-					}
-				},
-			},
-			{
-				displayName: 'Field To',
-				name: 'fieldTo',
-				description: 'Name of the field where the renamed values are stored',
-				type: 'string',
-				placeholder: 'to',
-				hint: 'The name of the field as text (e.g. “id”)',
-				default:'',
-				displayOptions:{
-					show:{
-						useTemplate:[
-							true
-						]
-					}
-				},
-			},
-			{
 				displayName: 'Keys',
 				name: 'keys',
 				placeholder: 'Add new key',
@@ -81,13 +42,6 @@ export class RenameKeysAdvanced implements INodeType {
 				typeOptions: {
 					multipleValues: true,
 					sortable: true,
-				},
-				displayOptions:{
-					show:{
-						useTemplate:[
-							false
-						]
-					}
 				},
 				default: {},
 				options: [
@@ -123,14 +77,41 @@ export class RenameKeysAdvanced implements INodeType {
 				type: 'collection',
 				default: {},
 				placeholder: 'Add Option',
-				displayOptions:{
-					show:{
-						useTemplate:[
-							false
-						]
-					}
-				},
 				options: [
+					{
+						displayName: 'Template',
+						name: 'templateReplacements',
+						placeholder: 'Add a Template',
+						description: 'Adds a Template to be used for the renaming of keys',
+						type: 'fixedCollection',
+						default: {},
+						options: [
+							{
+								displayName: 'Template',
+								name: 'template',
+								values: [
+									{
+										displayName: 'Field From',
+										name: 'fieldFrom',
+										description: 'Name of the field where the key names to rename are stored',
+										type: 'string',
+										placeholder: 'from',
+										hint: 'The name of the field as text (e.g. “id”)',
+										default:'',
+									},
+									{
+										displayName: 'Field To',
+										name: 'fieldTo',
+										description: 'Name of the field where the renamed values are stored',
+										type: 'string',
+										placeholder: 'to',
+										hint: 'The name of the field as text (e.g. “id”)',
+										default:'',
+									},
+								]
+							}
+						]
+					},
 					{
 						displayName: 'Regex',
 						name: 'regexReplacement',
