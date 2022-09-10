@@ -286,10 +286,16 @@ export class RenameKeysAdvanced implements INodeType {
 							}
 							if (key.match(regex)) {
 								const newKey = key.replace(regex, replaceRegex as string);
+
+								if(keepOnlyRenamed){
+									renamedKeys.push(newKey);
+								}
+
 								if (newKey !== key) {
 									obj[newKey] = obj[key];
 									delete obj[key];
 								}
+
 							}
 						}
 					}
@@ -297,9 +303,11 @@ export class RenameKeysAdvanced implements INodeType {
 				};
 				newItem.json = renameObjectKeys(newItem.json, depth as number);
 			});
+
 			if(keepOnlyRenamed){
 				newItem.json = pick(newItem.json,renamedKeys);
 			}
+
 			returnData.push(newItem);
 		}
 
