@@ -80,7 +80,7 @@ export class RenameKeysAdvanced implements INodeType {
 				options: [
 					{
 						displayName: 'Template',
-						name: 'templateReplacements',
+						name: 'template',
 						placeholder: 'Add a Template',
 						description: 'Adds a Template to be used for the renaming of keys',
 						type: 'fixedCollection',
@@ -189,6 +189,7 @@ export class RenameKeysAdvanced implements INodeType {
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData(0);
 		const template = this.getInputData(1);
+		console.log(template);
 		const keepOnlyRenamed = this.getNodeParameter('keepOnlyRenamed', 0, false) as boolean;
 		const returnData: INodeExecutionData[] = [];
 
@@ -198,14 +199,13 @@ export class RenameKeysAdvanced implements INodeType {
 		let value: any; // tslint:disable-line:no-any
 		let renamedKeys:string[] =[];;
 
-
-
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
 			renameKeys = this.getNodeParameter('keys.key', itemIndex, []) as IRenameKey[];
 
 			if(keepOnlyRenamed===true){
 				renamedKeys = renameKeys.map(({currentKey,newKey})=>newKey);
 			}
+
 			const regexReplacements = this.getNodeParameter(
 				'additionalOptions.regexReplacement.replacements',
 				itemIndex,
@@ -226,6 +226,39 @@ export class RenameKeysAdvanced implements INodeType {
 				// Reference binary data if any exists. We can reference it
 				// as this nodes does not change it
 				newItem.binary = item.binary;
+			}
+
+			const renameKeysTemplateFrom = this.getNodeParameter('additionalOptions.template.template.fieldFrom', itemIndex, '') as string;
+			const renameKeysTemplateTo = this.getNodeParameter('additionalOptions.template.template.fieldTo', itemIndex, '') as string;
+			if(renameKeysTemplateFrom!==''&& renameKeysTemplateTo!==''){
+				const renameKeysTemplate: IRenameKey[] = template.map((item)=> {
+					return {currentKey:item.json[renameKeysTemplateFrom], newKey:item.json[renameKeysTemplateTo]} as IRenameKey;
+				});
+				console.log(renameKeysTemplateFrom);
+				console.log(renameKeysTemplateTo);
+				console.log(renameKeysTemplate);
+
+				renameKeysTemplate.forEach((renameKey) => {
+					if (
+						renameKey.currentKey === '' ||
+						renameKey.newKey === '' ||
+						renameKey.currentKey === renameKey.newKey
+					) {
+						// Ignore all which do not have all the values set or if the new key is equal to the current key
+						return;
+					}
+					value = get(item.json, renameKey.currentKey as string);
+					if (value === undefined) {
+						return;
+					}
+					set(newItem.json, renameKey.newKey, value);
+
+					unset(newItem.json, renameKey.currentKey as string);
+				});
+
+				if(keepOnlyRenamed===true){
+					renamedKeys = renamedKeys.concat.apply(renamedKeys,renameKeysTemplate.map(({currentKey,newKey})=>newKey));
+				}
 			}
 
 			renameKeys.forEach((renameKey) => {
