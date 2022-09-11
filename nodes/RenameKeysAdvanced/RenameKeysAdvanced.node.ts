@@ -84,7 +84,7 @@ export class RenameKeysAdvanced implements INodeType {
 						name: 'template',
 						values: [
 							{
-								displayName: 'From',
+								displayName: 'Current Key Names Field',
 								name: 'fieldFrom',
 								description: 'Name of the field where the key names to rename are stored',
 								type: 'string',
@@ -93,7 +93,7 @@ export class RenameKeysAdvanced implements INodeType {
 								default:'',
 							},
 							{
-								displayName: 'To',
+								displayName: 'New Key Names Field',
 								name: 'fieldTo',
 								description: 'Name of the field where the renamed values are stored',
 								type: 'string',

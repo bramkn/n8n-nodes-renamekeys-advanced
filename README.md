@@ -5,7 +5,7 @@
 This is an n8n community node. It is based on the renamekeys node. It adds some extra quality of life functionality.
 * Keep only renamed keys.
 * Use a Template to rename keys, providing flexibility and ease of use to the node.
-* If rename key isn't set, keep the field but not rename it.(helpful for keep only renamed keys)
+* If new key name isn't set, keep the field but not rename it.(helpful for keep only renamed keys)
 
 ## Installation
 
