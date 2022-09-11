@@ -26,8 +26,15 @@ There is an order to it, as keys can be renamed by further functionality.
 2. Normal
 3. Regex
 
+## Example
+
+### Workflow
+![Workflow](https://github.com/bramkn/n8n-nodes-renamekeys-advanced/blob/master/images/workflow.png)
+
+### Template
 ![Template](https://github.com/bramkn/n8n-nodes-renamekeys-advanced/blob/master/images/template.png)
 
+### Node
 ![Example](https://github.com/bramkn/n8n-nodes-renamekeys-advanced/blob/master/images/example.png)
 
 
