@@ -17,8 +17,15 @@ This node was developed and tested with version 0.193.3 of n8n.
 
 ## Usage
 
-The node works the same as the default renamekeys node. The added boolean works the same as the boolean in the SET node.
-It will make it easier to pick and choose fields you want to keep in your workflow.
+The node works the same as the default renamekeys node. The added boolean named "Keep Only Renamed" works the same as the boolean in the SET node.
+
+The Template that can be added is used for setting the Keys you want renamed.
+All different options to set keys work still at the same time.
+There is an order to it, as keys can be renamed by further functionality.
+1. Template
+2. Normal
+3. Regex
+
 
 
 
