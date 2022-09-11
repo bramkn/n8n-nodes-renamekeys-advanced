@@ -72,110 +72,101 @@ export class RenameKeysAdvanced implements INodeType {
 				],
 			},
 			{
-				displayName: 'Additional Options',
-				name: 'additionalOptions',
-				type: 'collection',
+				displayName: 'Template',
+				name: 'template',
+				placeholder: 'Add a Template',
+				description: 'Adds a Template to be used for the renaming of keys',
+				type: 'fixedCollection',
 				default: {},
-				placeholder: 'Add Option',
 				options: [
 					{
 						displayName: 'Template',
 						name: 'template',
-						placeholder: 'Add a Template',
-						description: 'Adds a Template to be used for the renaming of keys',
-						type: 'fixedCollection',
-						default: {},
-						options: [
+						values: [
 							{
-								displayName: 'Template',
-								name: 'template',
-								values: [
-									{
-										displayName: 'From',
-										name: 'fieldFrom',
-										description: 'Name of the field where the key names to rename are stored',
-										type: 'string',
-										placeholder: 'from',
-										hint: 'The name of the field as text (e.g. “id”)',
-										default:'',
-									},
-									{
-										displayName: 'To',
-										name: 'fieldTo',
-										description: 'Name of the field where the renamed values are stored',
-										type: 'string',
-										placeholder: 'to',
-										hint: 'The name of the field as text (e.g. “id”)',
-										default:'',
-									},
-								]
-							}
+								displayName: 'From',
+								name: 'fieldFrom',
+								description: 'Name of the field where the key names to rename are stored',
+								type: 'string',
+								placeholder: 'from',
+								hint: 'The name of the field as text (e.g. “id”)',
+								default:'',
+							},
+							{
+								displayName: 'To',
+								name: 'fieldTo',
+								description: 'Name of the field where the renamed values are stored',
+								type: 'string',
+								placeholder: 'to',
+								hint: 'The name of the field as text (e.g. “id”)',
+								default:'',
+							},
 						]
-					},
+					}
+				]
+			},
+			{
+				displayName: 'Regex',
+				name: 'regexReplacement',
+				placeholder: 'Add new regular expression',
+				description: 'Adds a regular expressiond',
+				type: 'fixedCollection',
+				typeOptions: {
+					multipleValues: true,
+					sortable: true,
+				},
+				default: {},
+				options: [
 					{
-						displayName: 'Regex',
-						name: 'regexReplacement',
-						placeholder: 'Add new regular expression',
-						description: 'Adds a regular expressiond',
-						type: 'fixedCollection',
-						typeOptions: {
-							multipleValues: true,
-							sortable: true,
-						},
-						default: {},
-						options: [
+						displayName: 'Replacement',
+						name: 'replacements',
+						values: [
 							{
-								displayName: 'Replacement',
-								name: 'replacements',
-								values: [
+								displayName:
+									'Be aware that by using regular expression previously renamed keys can be affected',
+								name: 'regExNotice',
+								type: 'notice',
+								default: '',
+							},
+							{
+								displayName: 'Regular Expression',
+								name: 'searchRegex',
+								type: 'string',
+								default: '',
+								placeholder: 'e.g. [N-n]ame',
+								description: 'Regex to match the key name',
+								hint: 'Learn more and test RegEx <a href="https://regex101.com/">here</a>',
+							},
+							{
+								displayName: 'Replace With',
+								name: 'replaceRegex',
+								type: 'string',
+								default: '',
+								placeholder: 'replacedName',
+								description:
+									"The name the key/s should be renamed to. It's possible to use regex captures e.g. $1, $2, ...",
+							},
+							{
+								displayName: 'Options',
+								name: 'options',
+								type: 'collection',
+								default: {},
+								placeholder: 'Add Regex Option',
+								options: [
 									{
-										displayName:
-											'Be aware that by using regular expression previously renamed keys can be affected',
-										name: 'regExNotice',
-										type: 'notice',
-										default: '',
+										displayName: 'Case Insensitive',
+										name: 'caseInsensitive',
+										type: 'boolean',
+										description: 'Whether to use case insensitive match',
+										default: false,
 									},
 									{
-										displayName: 'Regular Expression',
-										name: 'searchRegex',
-										type: 'string',
-										default: '',
-										placeholder: 'e.g. [N-n]ame',
-										description: 'Regex to match the key name',
-										hint: 'Learn more and test RegEx <a href="https://regex101.com/">here</a>',
-									},
-									{
-										displayName: 'Replace With',
-										name: 'replaceRegex',
-										type: 'string',
-										default: '',
-										placeholder: 'replacedName',
-										description:
-											"The name the key/s should be renamed to. It's possible to use regex captures e.g. $1, $2, ...",
-									},
-									{
-										displayName: 'Options',
-										name: 'options',
-										type: 'collection',
-										default: {},
-										placeholder: 'Add Regex Option',
-										options: [
-											{
-												displayName: 'Case Insensitive',
-												name: 'caseInsensitive',
-												type: 'boolean',
-												description: 'Whether to use case insensitive match',
-												default: false,
-											},
-											{
-												displayName: 'Max Depth',
-												name: 'depth',
-												type: 'number',
-												default: -1,
-												description: 'Maximum depth to replace keys',
-												hint: 'Specify number for depth level (-1 for unlimited, 0 for top level only)',
-											},
-										],
+										displayName: 'Max Depth',
+										name: 'depth',
+										type: 'number',
+										default: -1,
+										description: 'Maximum depth to replace keys',
+										hint: 'Specify number for depth level (-1 for unlimited, 0 for top level only)',
 									},
 								],
 							},
