@@ -24,7 +24,7 @@ This node was developed and tested with version 0.193.3 of n8n.
 The node works the same as the default renamekeys node. The added boolean named "Keep Only Renamed" works the same as the boolean in the SET node.
 
 The Template that can be added is used for setting the Keys you want renamed.
-All different options to set keys work still at the same time.
+All different options to set keys work at the same time.
 There is an order to it, as keys can be renamed by further functionality.
 1. Template
 2. Normal
