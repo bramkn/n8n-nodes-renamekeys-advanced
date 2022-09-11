@@ -194,7 +194,7 @@ export class RenameKeysAdvanced implements INodeType {
 			renameKeys = this.getNodeParameter('keys.key', itemIndex, []) as IRenameKey[];
 
 			if(keepOnlyRenamed===true){
-				renamedKeys = renameKeys.map(({newKey})=>newKey);
+				renamedKeys = renameKeys.map(({currentKey,newKey})=>newKey || currentKey);
 			}
 
 			const regexReplacements = this.getNodeParameter(
@@ -244,7 +244,7 @@ export class RenameKeysAdvanced implements INodeType {
 				});
 
 				if(keepOnlyRenamed===true){
-					renamedKeys = renamedKeys.concat.apply(renamedKeys,renameKeysTemplate.map(({currentKey,newKey})=>newKey));
+					renamedKeys = renamedKeys.concat.apply(renamedKeys,renameKeysTemplate.map(({currentKey,newKey})=>newKey || currentKey));
 				}
 			}
 
