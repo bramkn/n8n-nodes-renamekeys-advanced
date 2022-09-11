@@ -198,7 +198,7 @@ export class RenameKeysAdvanced implements INodeType {
 			}
 
 			const regexReplacements = this.getNodeParameter(
-				'additionalOptions.regexReplacement.replacements',
+				'regexReplacement.replacements',
 				itemIndex,
 				[],
 			) as IDataObject[];
@@ -219,8 +219,8 @@ export class RenameKeysAdvanced implements INodeType {
 				newItem.binary = item.binary;
 			}
 
-			const renameKeysTemplateFrom = this.getNodeParameter('additionalOptions.template.template.fieldFrom', itemIndex, '') as string;
-			const renameKeysTemplateTo = this.getNodeParameter('additionalOptions.template.template.fieldTo', itemIndex, '') as string;
+			const renameKeysTemplateFrom = this.getNodeParameter('template.template.fieldFrom', itemIndex, '') as string;
+			const renameKeysTemplateTo = this.getNodeParameter('template.template.fieldTo', itemIndex, '') as string;
 			if(renameKeysTemplateFrom!==''&& renameKeysTemplateTo!==''){
 				const renameKeysTemplate: IRenameKey[] = template.map((item)=> {
 					return {currentKey:item.json[renameKeysTemplateFrom], newKey:item.json[renameKeysTemplateTo]} as IRenameKey;
