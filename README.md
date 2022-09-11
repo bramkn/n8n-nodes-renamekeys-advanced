@@ -26,7 +26,9 @@ There is an order to it, as keys can be renamed by further functionality.
 2. Normal
 3. Regex
 
+![Template](https://github.com/bramkn/n8n-nodes-renamekeys-advanced/blob/master/images/template.png)
 
+![Example](https://github.com/bramkn/n8n-nodes-renamekeys-advanced/blob/master/images/example.png)
 
 
 ## Resources
