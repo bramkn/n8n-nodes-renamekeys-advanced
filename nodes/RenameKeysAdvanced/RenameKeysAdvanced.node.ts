@@ -91,7 +91,7 @@ export class RenameKeysAdvanced implements INodeType {
 								name: 'template',
 								values: [
 									{
-										displayName: 'Field From',
+										displayName: 'From',
 										name: 'fieldFrom',
 										description: 'Name of the field where the key names to rename are stored',
 										type: 'string',
@@ -100,7 +100,7 @@ export class RenameKeysAdvanced implements INodeType {
 										default:'',
 									},
 									{
-										displayName: 'Field To',
+										displayName: 'To',
 										name: 'fieldTo',
 										description: 'Name of the field where the renamed values are stored',
 										type: 'string',
@@ -187,9 +187,9 @@ export class RenameKeysAdvanced implements INodeType {
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const items = this.getInputData(0);
-		const template = this.getInputData(1);
-		console.log(template);
+		const items:INodeExecutionData[] = this.getInputData(0);
+		const template:INodeExecutionData[] = this.getInputData(1);
+
 		const keepOnlyRenamed = this.getNodeParameter('keepOnlyRenamed', 0, false) as boolean;
 		const returnData: INodeExecutionData[] = [];
 
@@ -197,13 +197,13 @@ export class RenameKeysAdvanced implements INodeType {
 		let newItem: INodeExecutionData;
 		let renameKeys: IRenameKey[];
 		let value: any; // tslint:disable-line:no-any
-		let renamedKeys:string[] =[];;
+		let renamedKeys:string[] =[];
 
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
 			renameKeys = this.getNodeParameter('keys.key', itemIndex, []) as IRenameKey[];
 
 			if(keepOnlyRenamed===true){
-				renamedKeys = renameKeys.map(({currentKey,newKey})=>newKey);
+				renamedKeys = renameKeys.map(({newKey})=>newKey);
 			}
 
 			const regexReplacements = this.getNodeParameter(
@@ -234,10 +234,6 @@ export class RenameKeysAdvanced implements INodeType {
 				const renameKeysTemplate: IRenameKey[] = template.map((item)=> {
 					return {currentKey:item.json[renameKeysTemplateFrom], newKey:item.json[renameKeysTemplateTo]} as IRenameKey;
 				});
-				console.log(renameKeysTemplateFrom);
-				console.log(renameKeysTemplateTo);
-				console.log(renameKeysTemplate);
-
 				renameKeysTemplate.forEach((renameKey) => {
 					if (
 						renameKey.currentKey === '' ||
