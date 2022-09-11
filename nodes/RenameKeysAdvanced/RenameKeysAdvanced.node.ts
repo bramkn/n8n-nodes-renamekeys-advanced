@@ -1,7 +1,7 @@
 import { IExecuteFunctions } from 'n8n-core';
 import { IDataObject, INodeExecutionData, INodeType, INodeTypeDescription } from 'n8n-workflow';
 
-import { get, set, unset, pick } from 'lodash';
+import { get, set, pick, unset } from 'lodash';
 import { options } from 'rhea';
 
 interface IRenameKey {
@@ -101,9 +101,9 @@ export class RenameKeysAdvanced implements INodeType {
 								hint: 'The name of the field as text (e.g. “id”)',
 								default:'',
 							},
-						]
-					}
-				]
+						],
+					},
+				],
 			},
 			{
 				displayName: 'Regex',
